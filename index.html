@@ -1,175 +1,570 @@
 <!DOCTYPE html>
 <html lang="vi">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Bảo Vệ Môi Trường • Trái Đất Xanh</title>
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Montserrat:wght@400;600&display=swap" rel="stylesheet">
+    <link
+      href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Montserrat:wght@400;600&display=swap"
+      rel="stylesheet"
+    />
     <style>
-        :root { --green: #0a5f38; }
-        * { margin:0; padding:0; box-sizing:border-box; }
-        body { font-family: 'Montserrat', sans-serif; background: linear-gradient(135deg, #a8e6cf, #d4fc79); color: #333; }
+      :root {
+        --green: #0a5f38;
+      }
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+      body {
+        font-family: "Montserrat", sans-serif;
+        background: linear-gradient(135deg, #a8e6cf, #d4fc79);
+        color: #333;
+      }
 
-        /* MENU CỐ ĐỊNH - CHỈ 2 MỤC */
-        .main-header {
-            position: fixed; top: 0; left: 0; width: 100%;
-            background: rgba(10,95,56,0.97); backdrop-filter: blur(15px);
-            padding: 18px 40px; display: flex; align-items: center;
-            justify-content: space-between; z-index: 1000;
-            box-shadow: 0 8px 30px rgba(0,0,0,0.2); transition: all 0.4s;
+      /* MENU CỐ ĐỊNH - CHỈ 2 MỤC */
+      .main-header {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        background: rgba(10, 95, 56, 0.97);
+        backdrop-filter: blur(15px);
+        padding: 18px 40px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        z-index: 1000;
+        box-shadow: 0 8px 30px rgba(0, 0, 0, 0.2);
+        transition: all 0.4s;
+      }
+      .main-header.scrolled {
+        padding: 12px 40px;
+        background: rgba(10, 95, 56, 0.99);
+      }
+      .logo h2 {
+        color: white;
+        font-family: "Playfair Display", serif;
+        font-size: 2rem;
+        margin: 0;
+      }
+      .nav-menu {
+        display: flex;
+        gap: 50px;
+      }
+      .nav-menu a {
+        color: white;
+        text-decoration: none;
+        font-weight: 600;
+        font-size: 1.1rem;
+        position: relative;
+        transition: 0.3s;
+      }
+      .nav-menu a::after {
+        content: "";
+        position: absolute;
+        width: 0;
+        height: 3px;
+        background: #d4fc79;
+        bottom: -10px;
+        left: 50%;
+        transform: translateX(-50%);
+        transition: 0.4s;
+      }
+      .nav-menu a:hover::after,
+      .nav-menu a.active::after {
+        width: 100%;
+      }
+      .nav-menu a:hover,
+      .nav-menu a.active {
+        color: #d4fc79;
+      }
+      .menu-toggle {
+        display: none;
+        color: white;
+        font-size: 1.6rem;
+        cursor: pointer;
+      }
+
+      @media (max-width: 768px) {
+        .nav-menu {
+          position: fixed;
+          top: 70px;
+          left: -100%;
+          width: 100%;
+          height: 100vh;
+          background: rgba(10, 95, 56, 0.98);
+          flex-direction: column;
+          justify-content: center;
+          align-items: center;
+          transition: 0.4s;
+          gap: 50px;
         }
-        .main-header.scrolled { padding: 12px 40px; background: rgba(10,95,56,0.99); }
-        .logo h2 { color: white; font-family: 'Playfair Display', serif; font-size: 2rem; margin: 0; }
-        .nav-menu { display: flex; gap: 50px; }
+        .nav-menu.active {
+          left: 0;
+        }
         .nav-menu a {
-            color: white; text-decoration: none; font-weight: 600; font-size: 1.1rem;
-            position: relative; transition: 0.3s;
+          font-size: 2rem;
         }
-        .nav-menu a::after {
-            content: ''; position: absolute; width: 0; height: 3px; background: #d4fc79;
-            bottom: -10px; left: 50%; transform: translateX(-50%); transition: 0.4s;
+        .menu-toggle {
+          display: block;
         }
-        .nav-menu a:hover::after, .nav-menu a.active::after { width: 100%; }
-        .nav-menu a:hover, .nav-menu a.active { color: #d4fc79; }
-        .menu-toggle { display: none; color: white; font-size: 1.6rem; cursor: pointer; }
+      }
 
-        @media (max-width: 768px) {
-            .nav-menu { position: fixed; top: 70px; left: -100%; width: 100%; height: 100vh;
-                background: rgba(10,95,56,0.98); flex-direction: column; justify-content: center;
-                align-items: center; transition: 0.4s; gap: 50px; }
-            .nav-menu.active { left: 0; }
-            .nav-menu a { font-size: 2rem; }
-            .menu-toggle { display: block; }
-        }
+      /* Các phần còn lại giữ nguyên đẹp như cũ */
+      .hero {
+        height: 100vh;
+        background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.7)),
+          url("https://images.unsplash.com/photo-1502082553048-f009c37129b9?q=80&w=2400")
+            center/cover fixed;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+        color: white;
+      }
+      .hero h1 {
+        font-family: "Playfair Display", serif;
+        font-size: 5.5rem;
+        text-shadow: 0 4px 20px #000;
+      }
+      .hero p {
+        font-size: 1.6rem;
+        max-width: 800px;
+        margin: 20px auto;
+      }
+      .wrap {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 100px 20px 80px;
+        text-align: center;
+      }
+      h2 {
+        font-family: "Playfair Display", serif;
+        font-size: 3.2rem;
+        color: var(--green);
+        margin-bottom: 70px;
+        position: relative;
+      }
+      h2::after {
+        content: "";
+        width: 90px;
+        height: 5px;
+        background: #4caf50;
+        position: absolute;
+        bottom: -18px;
+        left: 50%;
+        transform: translateX(-50%);
+      }
+      .gallery {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        gap: 25px;
+        margin: 60px 0;
+      }
+      .gallery img {
+        width: 100%;
+        height: 280px;
+        object-fit: cover;
+        border-radius: 20px;
+        box-shadow: 0 12px 35px rgba(0, 0, 0, 0.2);
+        transition: 0.4s;
+      }
+      .gallery img:hover {
+        transform: translateY(-12px);
+        box-shadow: 0 25px 50px rgba(0, 0, 0, 0.3);
+      }
+      .media {
+        background: rgba(255, 255, 255, 0.97);
+        padding: 60px;
+        border-radius: 28px;
+        margin: 80px 0;
+        box-shadow: 0 15px 50px rgba(0, 0, 0, 0.15);
+      }
+      video {
+        width: 92%;
+        max-width: 900px;
+        border-radius: 18px;
+        box-shadow: 0 12px 35px rgba(0, 0, 0, 0.2);
+      }
+      .tips {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+        gap: 30px;
+        margin-top: 70px;
+      }
+      .tip {
+        background: white;
+        padding: 35px;
+        border-radius: 22px;
+        box-shadow: 0 12px 35px rgba(0, 0, 0, 0.12);
+        transition: 0.4s;
+      }
+      .tip:hover {
+        transform: translateY(-12px);
+      }
+      .tip h3 {
+        color: var(--green);
+        font-size: 3rem;
+      }
+      .action-img {
+        margin: 100px auto;
+        max-width: 1000px;
+        border-radius: 28px;
+        overflow: hidden;
+        box-shadow: 0 25px 60px rgba(0, 0, 0, 0.25);
+      }
+      .action-img img {
+        width: 100%;
+        transition: 0.5s;
+      }
+      .action-img img:hover {
+        transform: scale(1.04);
+      }
+      .quote {
+        font-family: "Playfair Display", serif;
+        font-size: 2.2rem;
+        font-style: italic;
+        color: #0a5f38;
+        background: rgba(255, 255, 255, 0.95);
+        padding: 70px;
+        border-radius: 28px;
+        margin: 120px auto;
+        max-width: 900px;
+        box-shadow: 0 15px 50px rgba(0, 0, 0, 0.12);
+      }
+      footer {
+        background: var(--green);
+        color: white;
+        text-align: center;
+        padding: 60px;
+        font-size: 1.1rem;
+      }
+      .music {
+        position: fixed;
+        bottom: 20px;
+        right: 20px;
+        background: rgba(10, 95, 56, 0.95);
+        color: white;
+        padding: 12px 18px;
+        border-radius: 50px;
+        font-size: 15px;
+        z-index: 999;
+        box-shadow: 0 8px 30px rgba(0, 0, 0, 0.4);
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        backdrop-filter: blur(12px);
+      }
+      .music button {
+        background: none;
+        border: none;
+        color: white;
+        font-size: 24px;
+        cursor: pointer;
+      }
 
-        /* Các phần còn lại giữ nguyên đẹp như cũ */
-        .hero { height: 100vh; background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.7)),
-                url('https://images.unsplash.com/photo-1502082553048-f009c37129b9?q=80&w=2400') center/cover fixed;
-                display: flex; align-items: center; justify-content: center; text-align: center; color: white; }
-        .hero h1 { font-family: 'Playfair Display', serif; font-size: 5.5rem; text-shadow: 0 4px 20px #000; }
-        .hero p { font-size: 1.6rem; max-width: 800px; margin: 20px auto; }
-        .wrap { max-width: 1200px; margin: 0 auto; padding: 100px 20px 80px; text-align: center; }
-        h2 { font-family: 'Playfair Display', serif; font-size: 3.2rem; color: var(--green); margin-bottom: 70px; position: relative; }
-        h2::after { content:''; width:90px; height:5px; background:#4caf50; position:absolute; bottom:-18px; left:50%; transform:translateX(-50%); }
-        .gallery { display:grid; grid-template-columns:repeat(auto-fit,minmax(300px,1fr)); gap:25px; margin:60px 0; }
-        .gallery img { width:100%; height:280px; object-fit:cover; border-radius:20px; box-shadow:0 12px 35px rgba(0,0,0,0.2); transition:0.4s; }
-        .gallery img:hover { transform:translateY(-12px); box-shadow:0 25px 50px rgba(0,0,0,0.3); }
-        .media { background:rgba(255,255,255,0.97); padding:60px; border-radius:28px; margin:80px 0; box-shadow:0 15px 50px rgba(0,0,0,0.15); }
-        video { width:92%; max-width:900px; border-radius:18px; box-shadow:0 12px 35px rgba(0,0,0,0.2); }
-        .tips { display:grid; grid-template-columns:repeat(auto-fit,minmax(240px,1fr)); gap:30px; margin-top:70px; }
-        .tip { background:white; padding:35px; border-radius:22px; box-shadow:0 12px 35px rgba(0,0,0,0.12); transition:0.4s; }
-        .tip:hover { transform:translateY(-12px); }
-        .tip h3 { color:var(--green); font-size:3rem; }
-        .action-img { margin:100px auto; max-width:1000px; border-radius:28px; overflow:hidden; box-shadow:0 25px 60px rgba(0,0,0,0.25); }
-        .action-img img { width:100%; transition:0.5s; }
-        .action-img img:hover { transform:scale(1.04); }
-        .quote { font-family:'Playfair Display',serif; font-size:2.2rem; font-style:italic; color:#0a5f38;
-                background:rgba(255,255,255,0.95); padding:70px; border-radius:28px; margin:120px auto; max-width:900px;
-                box-shadow:0 15px 50px rgba(0,0,0,0.12); }
-        footer { background:var(--green); color:white; text-align:center; padding:60px; font-size:1.1rem; }
-        .music { position:fixed; bottom:20px; right:20px; background:rgba(10,95,56,0.95); color:white;
-                padding:12px 18px; border-radius:50px; font-size:15px; z-index:999; box-shadow:0 8px 30px rgba(0,0,0,0.4);
-                display:flex; align-items:center; gap:12px; backdrop-filter:blur(12px); }
-        .music button { background:none; border:none; color:white; font-size:24px; cursor:pointer; }
+      /* SLIDESHOW */
+      .slideshow-container {
+        position: relative;
+        max-width: 1000px;
+        margin: 0 auto 60px;
+        border-radius: 28px;
+        overflow: hidden;
+        box-shadow: 0 20px 50px rgba(0, 0, 0, 0.2);
+      }
+      .mySlides {
+        display: none;
+        position: relative;
+      }
+      .mySlides img {
+        width: 100%;
+        height: 500px;
+        object-fit: cover;
+      }
+      .slide-text {
+        position: absolute;
+        bottom: 30px;
+        left: 50%;
+        transform: translateX(-50%);
+        background: rgba(10, 95, 56, 0.9);
+        color: #d4fc79;
+        padding: 14px 40px;
+        border-radius: 50px;
+        font-size: 1.5rem;
+        font-weight: 600;
+        backdrop-filter: blur(10px);
+      }
+      .prev,
+      .next {
+        cursor: pointer;
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+        width: auto;
+        padding: 20px;
+        color: white;
+        font-weight: bold;
+        font-size: 30px;
+        user-select: none;
+        background: rgba(0, 0, 0, 0.5);
+        border-radius: 50%;
+        transition: 0.3s;
+      }
+      .prev {
+        left: 20px;
+      }
+      .next {
+        right: 20px;
+      }
+      .prev:hover,
+      .next:hover {
+        background: rgba(212, 252, 121, 0.8);
+        color: #0a5f38;
+      }
+
+      .dot {
+        cursor: pointer;
+        height: 13px;
+        width: 13px;
+        margin: 0 6px;
+        background-color: #bbb;
+        border-radius: 50%;
+        display: inline-block;
+        transition: background-color 0.4s;
+      }
+      .active,
+      .dot:hover {
+        background-color: #0a5f38;
+      }
+
+      /* Điều chỉnh khoảng cách các phần cho sát lại */
+      .tips {
+        margin: 50px 0 70px;
+      }
+      .action-img {
+        margin: 40px auto 20px;
+      }
+      .quote {
+        margin: 80px auto 100px;
+      }
     </style>
-</head>
-<body>
-
+  </head>
+  <body>
     <!-- MENU CHỈ 2 MỤC -->
     <header class="main-header">
-        <div class="logo"><h2>Trái Đất Xanh</h2></div>
-        <nav class="nav-menu">
-            <a href="index.html" class="active">Trang Chủ</a>
-            <a href="tin-tuc.html">Tin Tức Nổi Bật</a>
-        </nav>
-        <div class="menu-toggle">Menu</div>
+      <div class="logo"><h2>Trái Đất Xanh</h2></div>
+      <nav class="nav-menu">
+        <a href="index.html" class="active">Trang Chủ</a>
+        <a href="tin-tuc.html">Tin Tức Nổi Bật</a>
+      </nav>
+      <div class="menu-toggle">Menu</div>
     </header>
 
     <section class="hero">
-        <div>
-            <h1>BẢO VỆ MÔI TRƯỜNG</h1>
-            <p>Chung tay hành động vì một Trái Đất xanh sạch đẹp</p>
-        </div>
+      <div>
+        <h1>BẢO VỆ MÔI TRƯỜNG</h1>
+        <p>Chung tay hành động vì một Trái Đất xanh sạch đẹp</p>
+      </div>
     </section>
 
     <div class="music">
-        <button id="playBtn">Play Music</button>
-        <input type="range" id="volume" min="0" max="100" value="20">
-        <span id="volText">20%</span>
+      <button id="playBtn">Play Music</button>
+      <input type="range" id="volume" min="0" max="100" value="20" />
+      <span id="volText">20%</span>
     </div>
     <audio id="bgMusic" loop>
-        <source src="img/Bảo vệ môi trường- bài hát về môi trường - Nguyễn Huệ.mp3" type="audio/mpeg">
+      <source
+        src="img/Bảo vệ môi trường- bài hát về môi trường - Nguyễn Huệ.mp3"
+        type="audio/mpeg"
+      />
     </audio>
 
     <div class="wrap">
-        <h2>Hình Ảnh Thực Tế</h2>
-        <div class="gallery">
-            <img src="img/chayrung.jpg" alt="Cháy rừng">
-            <img src="img/racbien.jpg" alt="Rác biển">
-            <img src="img/onhiemkhongkhi.jpg" alt="Ô nhiễm không khí">
-            <img src="img/chatpharung.jpg" alt="Chặt phá rừng">
-            <img src="img/dongvatbianhhuong.jpg" alt="Động vật bị ảnh hưởng">
-            <img src="img/rungxanhhivong.jpg" alt="Rừng xanh hy vọng">
+      <h2>Hình Ảnh Thực Tế</h2>
+      <div class="gallery">
+        <img src="img/chayrung.jpg" alt="Cháy rừng" />
+        <img src="img/racbien.jpg" alt="Rác biển" />
+        <img src="img/onhiemkhongkhi.jpg" alt="Ô nhiễm không khí" />
+        <img src="img/chatpharung.jpg" alt="Chặt phá rừng" />
+        <img src="img/dongvatbianhhuong.jpg" alt="Động vật bị ảnh hưởng" />
+        <img src="img/rungxanhhivong.jpg" alt="Rừng xanh hy vọng" />
+      </div>
+
+      <div class="media">
+        <h3>Video Kêu Gọi Bảo Vệ Môi Trường</h3>
+        <video id="mainVideo" controls poster="anhmoitruong.jpg">
+          <source
+            src="img/Video tuyên truyền- Bảo vệ môi trường.mp4"
+            type="video/mp4"
+          />
+        </video>
+      </div>
+
+      <h2>Hành Động Ngay Hôm Nay</h2>
+
+      <!-- SLIDER ẢNH MỚI -->
+      <div class="slideshow-container">
+        <div class="mySlides fade">
+          <img src="img/TraiDat.jpg" alt="Dùng túi vải" />
+          <div class="slide-text">Dùng túi vải thay túi ni-lông</div>
+        </div>
+        <div class="mySlides fade">
+          <img src="img/hanhdong2.jpg" alt="Phân loại rác" />
+          <div class="slide-text">Phân loại rác đúng cách</div>
+        </div>
+        <div class="mySlides fade">
+          <img src="img/hanhdong3.jpg" alt="Trồng cây" />
+          <div class="slide-text">Trồng thêm một cây xanh</div>
+        </div>
+        <div class="mySlides fade">
+          <img src="img/hanhdong4.jpg" alt="Tiết kiệm năng lượng" />
+          <div class="slide-text">Tiết kiệm điện – nước mỗi ngày</div>
+        </div>
+        <div class="mySlides fade">
+          <img src="img/hanhdong5.jpg" alt="Đi xe đạp" />
+          <div class="slide-text">Đi xe đạp hoặc đi chung xe</div>
         </div>
 
-        <div class="media">
-            <h3>Video Kêu Gọi Bảo Vệ Môi Trường</h3>
-            <video id="mainVideo" controls poster="anhmoitruong.jpg">
-                <source src="img/Video tuyên truyền- Bảo vệ môi trường.mp4" type="video/mp4">
-            </video>
-        </div>
+        <!-- Nút prev/next -->
+        <a class="prev" onclick="plusSlides(-1)">&#10094;</a>
+        <a class="next" onclick="plusSlides(1)">&#10095;</a>
+      </div>
 
-        <h2>Hành Động Ngay Hôm Nay</h2>
-        <div class="tips">
-            <div class="tip"><h3>01</h3><p>Dùng túi vải</p></div>
-            <div class="tip"><h3>02</h3><p>Phân loại rác</p></div>
-            <div class="tip"><h3>03</h3><p>Trồng cây xanh</p></div>
-            <div class="tip"><h3>04</h3><p>Tiết kiệm điện nước</p></div>
-            <div class="tip"><h3>05</h3><p>Đi xe đạp</p></div>
-            <div class="tip"><h3>06</h3><p>Lan tỏa thông điệp</p></div>
-        </div>
+      <!-- Chấm tròn điều hướng -->
+      <div style="text-align: center; margin: 20px 0">
+        <span class="dot" onclick="currentSlide(1)"></span>
+        <span class="dot" onclick="currentSlide(2)"></span>
+        <span class="dot" onclick="currentSlide(3)"></span>
+        <span class="dot" onclick="currentSlide(4)"></span>
+        <span class="dot" onclick="currentSlide(5)"></span>
+      </div>
 
-        <div class="action-img">
-            <img src="img/TraiDat.jpg" alt="Trồng cây bảo vệ môi trường">
+      <!-- 6 ô tips nhỏ hơn, sát lại -->
+      <!-- <div class="tips">
+        <div class="tip">
+          <h3>01</h3>
+          <p>Dùng túi vải</p>
         </div>
-        <p style="margin-top:25px; font-size:1.2rem; color:#0a5f38;">
-            <strong>Chung tay trồng cây – Hành động vì một Việt Nam xanh!</strong>
-        </p>
+        <div class="tip">
+          <h3>02</h3>
+          <p>Phân loại rác</p>
+        </div>
+        <div class="tip">
+          <h3>03</h3>
+          <p>Trồng cây xanh</p>
+        </div>
+        <div class="tip">
+          <h3>04</h3>
+          <p>Tiết kiệm điện nước</p>
+        </div>
+        <div class="tip">
+          <h3>05</h3>
+          <p>Đi xe đạp</p>
+        </div>
+        <div class="tip">
+          <h3>06</h3>
+          <p>Lan tỏa thông điệp</p>
+        </div>
+      </div> -->
 
-        <div class="quote">
-            “Chúng ta không thừa hưởng Trái Đất từ tổ tiên,<br>
-            chúng ta chỉ mượn nó từ con cháu tương lai.”
-        </div>
+      <!-- <div class="action-img">
+        <img src="img/TraiDat.jpg" alt="Trồng cây bảo vệ môi trường" />
+      </div> -->
+      <p style="margin: 25px 0 50px; font-size: 1.2rem; color: #0a5f38">
+        <strong>Chung tay trồng cây – Hành động vì một Việt Nam xanh!</strong>
+      </p>
+
+      <div class="quote">
+        “Chúng ta không thừa hưởng Trái Đất từ tổ tiên,<br />
+        chúng ta chỉ mượn nó từ con cháu tương lai.”
+      </div>
     </div>
 
     <footer>© 2025 Bảo Vệ Môi Trường • Chung tay vì một hành tinh xanh</footer>
 
     <script>
-        const menuToggle = document.querySelector('.menu-toggle');
-        const navMenu = document.querySelector('.nav-menu');
-        menuToggle.addEventListener('click', () => {
-            navMenu.classList.toggle('active');
-            menuToggle.textContent = navMenu.classList.contains('active') ? 'Close' : 'Menu';
-        });
-        document.querySelectorAll('.nav-menu a').forEach(a => a.addEventListener('click', () => {
-            navMenu.classList.remove('active'); menuToggle.textContent = 'Menu';
-        }));
-        window.addEventListener('scroll', () => {
-            document.querySelector('.main-header').classList.toggle('scrolled', window.scrollY > 100);
-        });
+      const menuToggle = document.querySelector(".menu-toggle");
+      const navMenu = document.querySelector(".nav-menu");
+      menuToggle.addEventListener("click", () => {
+        navMenu.classList.toggle("active");
+        menuToggle.textContent = navMenu.classList.contains("active")
+          ? "Close"
+          : "Menu";
+      });
+      document.querySelectorAll(".nav-menu a").forEach((a) =>
+        a.addEventListener("click", () => {
+          navMenu.classList.remove("active");
+          menuToggle.textContent = "Menu";
+        })
+      );
+      window.addEventListener("scroll", () => {
+        document
+          .querySelector(".main-header")
+          .classList.toggle("scrolled", window.scrollY > 100);
+      });
 
-        // Nhạc nền
-        const bgMusic = document.getElementById('bgMusic');
-        const video = document.getElementById('mainVideo');
-        const playBtn = document.getElementById('playBtn');
-        const volume = document.getElementById('volume');
-        const volText = document.getElementById('volText');
-        bgMusic.volume = 0.2; bgMusic.play();
-        volume.oninput = () => { bgMusic.volume = volume.value/100; volText.textContent = volume.value + '%'; };
-        playBtn.onclick = () => { bgMusic.paused ? bgMusic.play() : bgMusic.pause();
-            playBtn.textContent = bgMusic.paused ? 'Play Music' : 'Pause Music'; };
-        video.onplay = () => { bgMusic.pause(); playBtn.textContent = 'Play Music'; };
-        video.onpause = video.onended = () => { bgMusic.play(); playBtn.textContent = 'Pause Music'; };
+      // Nhạc nền
+      const bgMusic = document.getElementById("bgMusic");
+      const video = document.getElementById("mainVideo");
+      const playBtn = document.getElementById("playBtn");
+      const volume = document.getElementById("volume");
+      const volText = document.getElementById("volText");
+      bgMusic.volume = 0.2;
+      bgMusic.play();
+      volume.oninput = () => {
+        bgMusic.volume = volume.value / 100;
+        volText.textContent = volume.value + "%";
+      };
+      playBtn.onclick = () => {
+        bgMusic.paused ? bgMusic.play() : bgMusic.pause();
+        playBtn.textContent = bgMusic.paused ? "Play Music" : "Pause Music";
+      };
+      video.onplay = () => {
+        bgMusic.pause();
+        playBtn.textContent = "Play Music";
+      };
+      video.onpause = video.onended = () => {
+        bgMusic.play();
+        playBtn.textContent = "Pause Music";
+      };
+      // Slideshow
+      let slideIndex = 1;
+      showSlides(slideIndex);
+
+      function plusSlides(n) {
+        showSlides((slideIndex += n));
+      }
+
+      function currentSlide(n) {
+        showSlides((slideIndex = n));
+      }
+
+      function showSlides(n) {
+        let i;
+        let slides = document.getElementsByClassName("mySlides");
+        let dots = document.getElementsByClassName("dot");
+        if (n > slides.length) {
+          slideIndex = 1;
+        }
+        if (n < 1) {
+          slideIndex = slides.length;
+        }
+        for (i = 0; i < slides.length; i++) {
+          slides[i].style.display = "none";
+        }
+        for (i = 0; i < dots.length; i++) {
+          dots[i].className = dots[i].className.replace(" active", "");
+        }
+        slides[slideIndex - 1].style.display = "block";
+        dots[slideIndex - 1].className += " active";
+      }
+
+      // Tự động chạy slide mỗi 5 giây
+      setInterval(() => {
+        plusSlides(1);
+      }, 3000);
     </script>
-</body>
+  </body>
 </html>
