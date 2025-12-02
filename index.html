@@ -349,18 +349,28 @@
       .quote {
         margin: 80px auto 100px;
       }
+      /* Căn đều 3 mục menu trên mobile */
+@media (max-width: 768px) {
+  .nav-menu {
+    gap: 40px; /* giảm một chút để vừa 3 mục */
+  }
+  .nav-menu a {
+    font-size: 1.8rem;
+  }
+}
     </style>
   </head>
   <body>
-    <!-- MENU CHỈ 2 MỤC -->
-    <header class="main-header">
-      <div class="logo"><h2>Trái Đất Xanh</h2></div>
-      <nav class="nav-menu">
-        <a href="index.html" class="active">Trang Chủ</a>
-        <a href="tin-tuc.html">Tin Tức Nổi Bật</a>
-      </nav>
-      <div class="menu-toggle">Menu</div>
-    </header>
+    <!-- MENU BÂY GIỜ CÓ 3 MỤC: Trang Chủ - Tin Tức Nổi Bật - Liên Hệ -->
+<header class="main-header">
+  <div class="logo"><h2>Trái Đất Xanh</h2></div>
+  <nav class="nav-menu">
+    <a href="index.html" class="active">Trang Chủ</a>
+    <a href="tin-tuc.html">Tin Tức Nổi Bật</a>
+    <a href="lien-he.html">Liên Hệ</a> <!-- MỤC MỚI -->
+  </nav>
+  <div class="menu-toggle">Menu</div>
+</header>
 
     <section class="hero">
       <div>
@@ -407,23 +417,23 @@
       <!-- SLIDER ẢNH MỚI -->
       <div class="slideshow-container">
         <div class="mySlides fade">
-          <img src="img/TraiDat.jpg" alt="Dùng túi vải" />
+          <img src="img/dungtuivai.jpg" alt="Dùng túi vải" />
           <div class="slide-text">Dùng túi vải thay túi ni-lông</div>
         </div>
         <div class="mySlides fade">
-          <img src="img/hanhdong2.jpg" alt="Phân loại rác" />
+          <img src="img/phanloaira.jpg" alt="Phân loại rác" />
           <div class="slide-text">Phân loại rác đúng cách</div>
         </div>
         <div class="mySlides fade">
-          <img src="img/hanhdong3.jpg" alt="Trồng cây" />
+          <img src="img/trongcay.jpg" alt="Trồng cây" />
           <div class="slide-text">Trồng thêm một cây xanh</div>
         </div>
         <div class="mySlides fade">
-          <img src="img/hanhdong4.jpg" alt="Tiết kiệm năng lượng" />
+          <img src="img/tietkiemdiennuoc.jpg" alt="Tiết kiệm năng lượng" />
           <div class="slide-text">Tiết kiệm điện – nước mỗi ngày</div>
         </div>
         <div class="mySlides fade">
-          <img src="img/hanhdong5.jpg" alt="Đi xe đạp" />
+          <img src="img/dixedap.jpg" alt="Đi xe đạp" />
           <div class="slide-text">Đi xe đạp hoặc đi chung xe</div>
         </div>
 
@@ -441,37 +451,6 @@
         <span class="dot" onclick="currentSlide(5)"></span>
       </div>
 
-      <!-- 6 ô tips nhỏ hơn, sát lại -->
-      <!-- <div class="tips">
-        <div class="tip">
-          <h3>01</h3>
-          <p>Dùng túi vải</p>
-        </div>
-        <div class="tip">
-          <h3>02</h3>
-          <p>Phân loại rác</p>
-        </div>
-        <div class="tip">
-          <h3>03</h3>
-          <p>Trồng cây xanh</p>
-        </div>
-        <div class="tip">
-          <h3>04</h3>
-          <p>Tiết kiệm điện nước</p>
-        </div>
-        <div class="tip">
-          <h3>05</h3>
-          <p>Đi xe đạp</p>
-        </div>
-        <div class="tip">
-          <h3>06</h3>
-          <p>Lan tỏa thông điệp</p>
-        </div>
-      </div> -->
-
-      <!-- <div class="action-img">
-        <img src="img/TraiDat.jpg" alt="Trồng cây bảo vệ môi trường" />
-      </div> -->
       <p style="margin: 25px 0 50px; font-size: 1.2rem; color: #0a5f38">
         <strong>Chung tay trồng cây – Hành động vì một Việt Nam xanh!</strong>
       </p>
@@ -485,25 +464,31 @@
     <footer>© 2025 Bảo Vệ Môi Trường • Chung tay vì một hành tinh xanh</footer>
 
     <script>
+        
       const menuToggle = document.querySelector(".menu-toggle");
-      const navMenu = document.querySelector(".nav-menu");
-      menuToggle.addEventListener("click", () => {
-        navMenu.classList.toggle("active");
-        menuToggle.textContent = navMenu.classList.contains("active")
-          ? "Close"
-          : "Menu";
-      });
-      document.querySelectorAll(".nav-menu a").forEach((a) =>
-        a.addEventListener("click", () => {
-          navMenu.classList.remove("active");
-          menuToggle.textContent = "Menu";
-        })
-      );
-      window.addEventListener("scroll", () => {
-        document
-          .querySelector(".main-header")
-          .classList.toggle("scrolled", window.scrollY > 100);
-      });
+  const navMenu = document.querySelector(".nav-menu");
+
+  menuToggle.addEventListener("click", () => {
+    navMenu.classList.toggle("active");
+    menuToggle.textContent = navMenu.classList.contains("active")
+      ? "Close"
+      : "Menu";
+  });
+
+  // Đóng menu khi click vào bất kỳ link nào (bao gồm cả Liên Hệ mới thêm)
+  document.querySelectorAll(".nav-menu a").forEach((a) =>
+    a.addEventListener("click", () => {
+      navMenu.classList.remove("active");
+      menuToggle.textContent = "Menu";
+    })
+  );
+
+  // Các script còn lại (scroll header, nhạc, slideshow…) giữ nguyên như cũ
+  window.addEventListener("scroll", () => {
+    document
+      .querySelector(".main-header")
+      .classList.toggle("scrolled", window.scrollY > 100);
+  });
 
       // Nhạc nền
       const bgMusic = document.getElementById("bgMusic");
